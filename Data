@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Proiect_Coworking.Models;
+
+namespace Proiect_Coworking.Data
+{
+    public class Proiect_CoworkingContext : DbContext
+    {
+        public Proiect_CoworkingContext (DbContextOptions<Proiect_CoworkingContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<PachetServiciu> PachetServiciu { get; set; } = default!;
+        public DbSet<Locatie> Locatie { get; set; } = default!;
+
+        public DbSet<Sala> Sala { get; set; } = default!;
+        public DbSet<Membru> Membru { get; set; } = default!;
+        public DbSet<Rezervare> Rezervare { get; set; } = default!;
+    }
+}
