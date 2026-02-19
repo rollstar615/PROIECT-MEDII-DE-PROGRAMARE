@@ -1,0 +1,36 @@
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Proiect_Coworking.Models
+{
+    /// <summary>
+    /// Reprezinta o locatie fizica de coworking (cladire / spatiu).
+    /// </summary>
+    public class Locatie
+    {
+        public int LocatieID { get; set; }
+
+        [Required]
+        [StringLength(120, MinimumLength = 3)]
+        [DisplayName("Nume locatie")]
+        public string Nume { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(200, MinimumLength = 5)]
+        [DisplayName("Adresa")]
+        public string Adresa { get; set; } = string.Empty;
+
+        [Required]
+        [StringLength(80, MinimumLength = 2)]
+        [DisplayName("Oras")]
+        public string Oras { get; set; } = string.Empty;
+
+        [Phone]
+        [StringLength(30)]
+        [DisplayName("Telefon")]
+        public string? Telefon { get; set; }
+
+        // Relatii
+        public ICollection<Sala> Sali { get; set; } = new List<Sala>();
+    }
+}
