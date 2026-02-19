@@ -1,47 +1,48 @@
-﻿@page
-@model Proiect_Coworking.Pages.Locatii.CreateModel
+@page
+@model Proiect_Coworking.Pages.Membri.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adauga membru";
 }
 
-<h1>Adauga locatie</h1>
+<h1>Adauga membru</h1>
 
-<h4>Locatie coworking</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="Locatie.Nume" class="control-label"></label>
-                <input asp-for="Locatie.Nume" class="form-control" />
-                <span asp-validation-for="Locatie.Nume" class="text-danger"></span>
+                <label asp-for="Membru.Nume" class="control-label"></label>
+                <input asp-for="Membru.Nume" class="form-control" />
+                <span asp-validation-for="Membru.Nume" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Locatie.Adresa" class="control-label"></label>
-                <input asp-for="Locatie.Adresa" class="form-control" />
-                <span asp-validation-for="Locatie.Adresa" class="text-danger"></span>
+                <label asp-for="Membru.Email" class="control-label"></label>
+                <input asp-for="Membru.Email" class="form-control" />
+                <span asp-validation-for="Membru.Email" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Locatie.Oras" class="control-label"></label>
-                <input asp-for="Locatie.Oras" class="form-control" />
-                <span asp-validation-for="Locatie.Oras" class="text-danger"></span>
+                <label asp-for="Membru.Telefon" class="control-label"></label>
+                <input asp-for="Membru.Telefon" class="form-control" />
+                <span asp-validation-for="Membru.Telefon" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Locatie.Telefon" class="control-label"></label>
-                <input asp-for="Locatie.Telefon" class="form-control" />
-                <span asp-validation-for="Locatie.Telefon" class="text-danger"></span>
+                <label asp-for="Membru.DataInscriere" class="control-label"></label>
+                <input asp-for="Membru.DataInscriere" class="form-control" />
+                <span asp-validation-for="Membru.DataInscriere" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+            <div class="form-group mt-2">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-page="Index">Back</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
