@@ -34,3 +34,156 @@ namespace Proiect_Coworking.Models
         public ICollection<Sala> Sali { get; set; } = new List<Sala>();
     }
 }
+
+
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Proiect_Coworking.Models
+{
+    /// <summary>
+    /// Membru / client care poate face rezervari.
+    /// </summary>
+    public class Membru
+    {
+        public int MembruID { get; set; }
+
+        [Required]
+        [StringLength(120, MinimumLength = 3)]
+        [DisplayName("Nume")]
+        public string Nume { get; set; } = string.Empty;
+
+        [Required]
+        [EmailAddress]
+        [StringLength(120)]
+        [DisplayName("Email")]
+        public string Email { get; set; } = string.Empty;
+
+        [Phone]
+        [StringLength(30)]
+        [DisplayName("Telefon")]
+        public string? Telefon { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayName("Data inscrierii")]
+        public DateTime DataInscriere { get; set; } = DateTime.Today;
+
+        // Relatii
+        public ICollection<Rezervare> Rezervari { get; set; } = new List<Rezervare>();
+    }
+}
+
+
+
+
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Proiect_Coworking.Models
+{
+    /// <summary>
+    /// Pachet de servicii (ex. "Basic", "Pro", "Sala cu videoproiector") care poate fi ales la o rezervare.
+    /// </summary>
+    public class PachetServiciu
+    {
+        public int PachetServiciuID { get; set; }
+
+        [Required]
+        [StringLength(80, MinimumLength = 3)]
+        [DisplayName("Pachet")]
+        public string Nume { get; set; } = string.Empty;
+
+        [StringLength(250)]
+        [DisplayName("Descriere")]
+        public string? Descriere { get; set; }
+
+        [Range(0, 9999)]
+        [Column(TypeName = "decimal(8,2)")]
+        [DisplayName("Pret / ora")]
+        public decimal PretPeOra { get; set; }
+
+        // Relatii
+        public ICollection<Rezervare> Rezervari { get; set; } = new List<Rezervare>();
+    }
+}
+
+
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Proiect_Coworking.Models
+{
+    /// <summary>
+    /// Rezervare sala de coworking.
+    /// </summary>
+    public class Rezervare
+    {
+        public int RezervareID { get; set; }
+
+        [Required]
+        [DataType(DataType.DateTime)]
+        [DisplayName("Data si ora inceput")]
+        public DateTime DataOraInceput { get; set; }
+
+        [Range(1, 12)]
+        [DisplayName("Durata (ore)")]
+        public int DurataOre { get; set; } = 1;
+
+        [Required]
+        [StringLength(30)]
+        [DisplayName("Status")]
+        public string Status { get; set; } = "Nou"; // Nou / Confirmata / Anulata
+
+        [StringLength(250)]
+        [DisplayName("Observatii")]
+        public string? Observatii { get; set; }
+
+        // Relatii
+        [DisplayName("Sala")]
+        public int SalaID { get; set; }
+        public Sala? Sala { get; set; }
+
+        [DisplayName("Membru")]
+        public int MembruID { get; set; }
+        public Membru? Membru { get; set; }
+
+        [DisplayName("Pachet")]
+        public int PachetServiciuID { get; set; }
+        public PachetServiciu? PachetServiciu { get; set; }
+    }
+}
+
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Proiect_Coworking.Models
+{
+    /// <summary>
+    /// Sala / camera dintr-o locatie de coworking.
+    /// </summary>
+    public class Sala
+    {
+        public int SalaID { get; set; }
+
+        [Required]
+        [StringLength(80, MinimumLength = 2)]
+        [DisplayName("Denumire sala")]
+        public string Nume { get; set; } = string.Empty;
+
+        [Range(1, 200)]
+        [DisplayName("Capacitate")]
+        public int Capacitate { get; set; }
+
+        [StringLength(120)]
+        [DisplayName("Dotari")]
+        public string? Dotari { get; set; } // ex. "TV, Whiteboard, Proiector"
+
+        // Relatii
+        [DisplayName("Locatie")]
+        public int LocatieID { get; set; }
+        public Locatie? Locatie { get; set; }
+
+        public ICollection<Rezervare> Rezervari { get; set; } = new List<Rezervare>();
+    }
+}
